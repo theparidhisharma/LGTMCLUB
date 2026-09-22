@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LGTM CLUB — Technology. Talent. Campuses. Connected.</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                        cinzel: ['Cinzel', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#08060d',
+                            card: '#0f0c17',
+                            accent: '#818cf8',
+                            muted: '#94a3b8',
+                            surface: '#151122',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #08060d;
+            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .serif-heading {
+            font-family: 'Playfair Display', Georgia, serif;
+            letter-spacing: -0.02em;
+        }
+        
+        .cinzel-heading {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.05em;
+        }
+
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            border-color: rgba(129, 140, 248, 0.4);
+            box-shadow: 0 25px 50px -12px rgba(13, 10, 26, 0.9), 0 0 35px rgba(99, 102, 241, 0.15);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #08060d;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e182e;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #31274a;
+        }
+
+        .glass-pill {
+            background: rgba(18, 14, 28, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stack-card {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Horizontal Split Hero Door Effect Styles */
+        .split-hero-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #08060d;
+        }
+
+        .split-hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .split-hero-panel {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background-color: #08060d;
+            z-index: 10;
+            overflow: hidden;
+            transition: transform 0.1s linear;
+        }
+
+        .split-hero-top {
+            top: 0;
+            transform-origin: top;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .split-hero-bottom {
+            bottom: 0;
+            transform-origin: bottom;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .subtle-purple-glow {
+            text-shadow: 0 0 40px rgba(129, 140, 248, 0.18);
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-on-scroll.is-revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .sticky-stack-container {
+            position: relative;
+        }
+        .sticky-stack-card {
+            position: sticky;
+            top: 100px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
+</head>
+<body class="bg-[#08060d] text-slate-100 antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- Sticky Navigation Bar -->
+    <nav id="sticky-navbar" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 transform w-[92%] max-w-4xl opacity-0 -translate-y-10">
+        <div class="glass-pill px-6 py-3 rounded-full flex items-center justify-between shadow-2xl">
+            <a href="#heroWrapper" class="cinzel-heading font-bold text-lg text-white tracking-wider flex items-center gap-3">
+                <img src="https://i.ibb.co/Dfm8FWvv/logo.png" alt="LGTM Logo" class="w-8 h-8 rounded-lg object-contain" onerror="this.src='https://placehold.co/40x40/151122/818cf8?text=LGTM'">
+                <span>LGTM</span>
+            </a>
+
+            <div class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-300">
+                <a href="#hero-info" class="hover:text-white transition-colors">About</a>
+                <a href="#bridge" class="hover:text-white transition-colors">The Bridge</a>
+                <a href="#what-we-do" class="hover:text-white transition-colors">Programs</a>
+                <a href="#for-ecosystem" class="hover:text-white transition-colors">Ecosystem</a>
+                <a href="#past-events" class="hover:text-white transition-colors">Past Events</a>
+                <a href="#team" class="hover:text-white transition-colors">Team</a>
+            </div>
+
+            <button onclick="openModal('partnerModal')" class="bg-white hover:bg-slate-200 text-black px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all shadow-md">
+                Partner With Us
+            </button>
+        </div>
+    </nav>
+
+    <!-- Pinned Horizontal Split Reveal Hero Section (200vh height) -->
+    <div id="heroWrapper" class="relative h-[200vh]">
+        <section id="frame1" class="sticky top-0 h-screen split-hero-container">
+            <div class="split-hero-bg">
+                <div class="absolute inset-0 bg-black/40"></div>
+                <div class="absolute inset-0 bg-gradient-to-tr from-indigo-950/30 via-transparent to-purple-950/25 pointer-events-none"></div>
+            </div>
+
+            <!-- Top Split Door -->
+            <div id="splitTopPanel" class="split-hero-panel split-hero-top flex flex-col justify-end items-center pb-6">
+                <div class="text-center space-y-4 px-4">
+                    <h1 class="cinzel-heading text-5xl md:text-8xl lg:text-9xl font-black tracking-widest text-white subtle-purple-glow">
+                        LGTM CLUB
+                    </h1>
+                    <p class="serif-heading text-xl md:text-2xl text-slate-300 font-medium tracking-wide">
+                        Technology. Talent. Campuses. Connected.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bottom Split Door -->
+            <div id="splitBottomPanel" class="split-hero-panel split-hero-bottom flex flex-col justify-start items-center pt-6">
+                <div class="flex flex-col items-center gap-2 text-slate-400 text-xs tracking-widest uppercase font-mono">
+                    <span>Scroll to open horizontal split reveal</span>
+                    <i class="fa-solid fa-chevron-down animate-bounce text-xs text-indigo-400"></i>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Subsequent Stacking Sections -->
+    <div id="stacking-container" class="relative">
+        
+        <!-- About Section -->
+        <section id="hero-info" class="sticky top-12 min-h-screen bg-[#090710] border-b border-white/10 flex flex-col justify-between p-6 md:p-20 pt-28 shadow-[0_-30px_60px_rgba(0,0,0,0.9)] stack-card z-20">
+            <div class="max-w-5xl mx-auto my-auto space-y-8 text-center md:text-left reveal-on-scroll">
+                
+                <h2 class="cinzel-heading text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tight subtle-purple-glow">
+                    Engineering Campus Innovation
+                </h2>
+
+                <div class="space-y-6 max-w-3xl text-slate-300 text-base md:text-xl leading-relaxed">
+                    <p class="font-medium text-slate-100">
+                        LGTM Club is a technology-event and campus partnership company connecting institutions, technology companies, and student builders through professionally operated innovation programs.
+                    </p>
+                    <p class="text-sm md:text-lg text-slate-400">
+                        We design, commercialize, and execute hackathons, buildathons, AI challenges, CTFs, developer programs, workshops, and industry-backed campus initiatives.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center gap-4 pt-4">
+                    <button onclick="openModal('partnerModal')" class="w-full sm:w-auto px-8 py-4 bg-white text-black hover:bg-slate-200 font-bold uppercase tracking-wider text-xs rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 group">
+                        <span>PARTNER WITH US</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+
+                    <a href="#what-we-do" class="w-full sm:w-auto px-8 py-4 bg-[#141021] hover:bg-[#1d172e] text-slate-200 font-bold uppercase tracking-wider text-xs rounded-xl border border-white/15 transition-all text-center">
+                        EXPLORE PROGRAMS
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-6 text-right border-t border-white/10">
+                <span class="cinzel-heading text-lg md:text-2xl font-extrabold text-slate-500 tracking-widest uppercase">
+                    WE GROW TOGETHER
+                </span>
+            </div>
+        </section>
+
+        <!-- The Bridge Section -->
+        <section id="bridge" class="sticky top-24 min-h-screen bg-[#0c0916] border-b border-white/10 flex flex-col justify-center p-6 md:p-20 shadow-[0_-40px_80px_rgba(0,0,0,0.95)] stack-card z-30">
+            <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center reveal-on-scroll">
+                
+                <div class="lg:col-span-5 bg-gradient-to-br from-slate-100 to-slate-300 text-black p-8 md:p-12 rounded-3xl flex flex-col justify-between min-h-[420px] shadow-2xl relative overflow-hidden">
+                    <div class="space-y-4">
+                        <span class="font-mono text-xs uppercase tracking-widest text-slate-600 block">Core Mission</span>
+                        <h3 class="cinzel-heading text-3xl md:text-4xl font-black leading-tight text-black">
+                            THE BRIDGE BETWEEN CAMPUSES & INDUSTRY
+                        </h3>
+                    </div>
+                    <div class="pt-8">
+                        <p class="text-xs uppercase font-mono tracking-widest text-slate-700">Where institutions meet technology. Where builders meet opportunity.</p>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="space-y-4">
+                        <div class="p-6 md:p-8 rounded-2xl bg-[#100d1c] border border-white/10 hover:border-indigo-500/40 transition-all card-hover">
+                            <div class="flex items-start gap-4">
+                                <div class="p-3 bg-indigo-500/10 rounded-xl text-indigo-300 font-mono font-bold text-sm">01</div>
+                                <div>
+                                    <h4 class="text-base md:text-lg font-bold text-white mb-1">Technology Companies</h4>
+                                    <p class="text-slate-300 text-xs md:text-sm leading-relaxed">Want meaningful access to developers and emerging talent directly inside learning environments.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 md:p-8 rounded-2xl bg-[#100d1c] border border-white/10 hover:border-indigo-500/40 transition-all card-hover">
+                            <div class="flex items-start gap-4">
+                                <div class="p-3 bg-indigo-500/10 rounded-xl text-indigo-300 font-mono font-bold text-sm">02</div>
+                                <div>
+                                    <h4 class="text-base md:text-lg font-bold text-white mb-1">Institutions</h4>
+                                    <p class="text-slate-300 text-xs md:text-sm leading-relaxed">Want high-quality technical programs without having to build the entire operating infrastructure themselves.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 md:p-8 rounded-2xl bg-[#100d1c] border border-white/10 hover:border-indigo-500/40 transition-all card-hover">
+                            <div class="flex items-start gap-4">
+                                <div class="p-3 bg-indigo-500/10 rounded-xl text-indigo-300 font-mono font-bold text-sm">03</div>
+                                <div>
+                                    <h4 class="text-base md:text-lg font-bold text-white mb-1">Student Builders</h4>
+                                    <p class="text-slate-300 text-xs md:text-sm leading-relaxed">Want opportunities to: <span class="text-white font-semibold">Build. Learn. Compete. Connect. Get noticed.</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-white/10">
+                        <p class="cinzel-heading text-xl md:text-2xl font-bold text-white">
+                            LGTM brings all three together.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- What We Do Section -->
+    <section id="what-we-do" class="py-28 md:py-36 px-6 md:px-16 border-b border-white/10 bg-[#08060d] relative z-40">
+        <div class="max-w-7xl mx-auto space-y-16">
+            
+            <div class="text-center space-y-6 max-w-3xl mx-auto reveal-on-scroll">
+                <h2 class="cinzel-heading text-4xl md:text-6xl font-black text-white subtle-purple-glow">
+                    WHAT WE DO
+                </h2>
+                <p class="text-slate-300 text-base md:text-lg leading-relaxed">
+                    We turn technical ideas into professionally operated programs. From the first partnership conversation to the final demo, LGTM handles the operating layer.
+                </p>
+                <div>
+                    <span class="inline-block text-xs font-mono text-indigo-300 uppercase tracking-widest bg-indigo-500/10 px-4 py-2 rounded-full border border-indigo-500/20">
+                        [ CLICK ANY CARD BELOW TO OPEN FULL-PAGE PROGRAM DETAIL VIEW ]
+                    </span>
+                </div>
+            </div>
+
+            <!-- 8 Cards Grid with stagger reveal -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal-on-scroll">
+                
+                <div onclick="openProgramDetail(0)" class="bg-[#f1f5f9] hover:bg-white text-slate-900 border border-slate-300 rounded-3xl p-8 text-center space-y-6 card-hover cursor-pointer group shadow-xl">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-indigo-950/10 text-indigo-900 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <div>
+                        <h3 class="cinzel-heading text-lg font-bold text-slate-900 mb-2">HACKATHONS</h3>
+                        <p class="text-xs text-slate-600 font-mono uppercase tracking-wider">Click for details →</p>
+                    </div>
+                </div>
+
+                <div onclick="openProgramDetail(1)" class="bg-[#f1f5f9] hover:bg-white text-slate-900 border border-slate-300 rounded-3xl p-8 text-center space-y-6 card-hover cursor-pointer group shadow-xl">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-indigo-950/10 text-indigo-900 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <div>
+                        <h3 class="cinzel-heading text-lg font-bold text-slate-900 mb-2">AI PROGRAMS</h3>
+                        <p class="text-xs text-slate-600 font-mono uppercase tracking-wider">Click for details →</p>
+                    </div>
+                </div>
+
+                <div onclick="openProgramDetail(2)" class="bg-[#f1f5f9] hover:bg-white text-slate-900 border border-slate-300 rounded-3xl p-8 text-center space-y-6 card-hover cursor-pointer group shadow-xl">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-indigo-950/10 text-indigo-900 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-cubes"></i>
+                    </div>
+                    <div>
+                        <h3 class="cinzel-heading text-lg font-bold text-slate-900 mb-2">BUILDATHONS</h3>
+                        <p class="text-xs text-slate-600 font-mono uppercase tracking-wider">Click for details →</p>
+                    </div>
+                </div>
+
+                <div onclick="openProgramDetail(3)" class="bg-[#f1f5f9] hover:bg-white text-slate-900 border border-slate-300 rounded-3xl p-8 text-center space-y-6 card-hover cursor-pointer group shadow-xl">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-indigo-950/10 text-indigo-900 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h3 class="cinzel-heading text-lg font-bold text-slate-900 mb-2">CYBERSECURITY</h3>
+                        <p class="text-xs text-slate-600 font-mono uppercase tracking-wider">Click for details →</p>
+                    </div>
+                </div>
+
+                <div onclick="openProgramDetail(4)" class="bg-[#f1f5f9] hover:bg-white text-slate-900 border border-slate-300 rounded-3xl p-8 text-center space-y-6 card-hover cursor-pointer group shadow-xl">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-indigo-950/10 text-indigo-900 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                    </div>
+                    <div>
+                        <h3 class="cinzel-heading text-lg font-bold text-slate-900 mb-2">WORKSHOPS</h3>
+                        <p class="text-xs text-slate-600 font-mono uppercase tracking-wider">Click for details →</p>
+                    </div>
+                </div>
+
+                <div onclick="openProgramDetail(5)" class="bg-[#f1f5f9] hover:bg-white text-slate-900 border border-slate-300 rounded-3xl p-8 text-center space-y-6 card-hover cursor-pointer group shadow-xl">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-indigo-950/10 text-indigo-900 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-terminal"></i>
+                    </div>
+                    <div>
+                        <h3 class="cinzel-heading text-lg font-bold text-slate-900 mb-2">DEV PROGRAMS</h3>
+                        <p class="text-xs text-slate-600 font-mono uppercase tracking-wider">Click for details →</p>
+                    </div>
+                </div>
+
+                <div onclick="openProgramDetail(6)" class="bg-[#f1f5f9] hover:bg-white text-slate-900 border border-slate-300 rounded-3xl p-8 text-center space-y-6 card-hover cursor-pointer group shadow-xl">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-indigo-950/10 text-indigo-900 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <div>
+                        <h3 class="cinzel-heading text-lg font-bold text-slate-900 mb-2">INNOVATION</h3>
+                        <p class="text-xs text-slate-600 font-mono uppercase tracking-wider">Click for details →</p>
+                    </div>
+                </div>
+
+                <div onclick="openProgramDetail(7)" class="bg-[#f1f5f9] hover:bg-white text-slate-900 border border-slate-300 rounded-3xl p-8 text-center space-y-6 card-hover cursor-pointer group shadow-xl">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-indigo-950/10 text-indigo-900 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <div>
+                        <h3 class="cinzel-heading text-lg font-bold text-slate-900 mb-2">IDEATHONS</h3>
+                        <p class="text-xs text-slate-600 font-mono uppercase tracking-wider">Click for details →</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Ecosystem Section with Sticky Card-Stacking Overlapping Effect -->
+    <section id="for-ecosystem" class="py-28 md:py-36 px-6 md:px-16 border-b border-white/10 bg-[#0a0712] sticky-stack-container">
+        <div class="max-w-7xl mx-auto space-y-16">
+            
+            <div class="text-center space-y-4 max-w-2xl mx-auto reveal-on-scroll">
+                <h2 class="cinzel-heading text-4xl md:text-5xl font-black text-white subtle-purple-glow">
+                    BUILT FOR EVERY STAKEHOLDER
+                </h2>
+                <p class="text-slate-400 text-sm md:text-base">Scroll to explore how LGTM integrates with universities and technology leaders.</p>
+            </div>
+
+            <!-- Card 1: Institutions (Sticky Stacked) -->
+            <div class="sticky-stack-card bg-[#100d1b] p-8 md:p-14 rounded-3xl border border-white/10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start shadow-2xl reveal-on-scroll" style="top: 100px;">
+                <div class="lg:col-span-4 space-y-4">
+                    <span class="px-3.5 py-1 rounded-full bg-indigo-500/15 text-indigo-300 font-mono text-xs uppercase tracking-widest">
+                        FOR INSTITUTIONS
+                    </span>
+                    <h3 class="cinzel-heading text-2xl md:text-4xl font-bold text-white">
+                        Your campus.<br>Our operating layer.
+                    </h3>
+                    <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+                        Running a serious technology program requires more than a registration form. LGTM works with institutions to design and execute programs seamlessly.
+                    </p>
+                    <button onclick="openModal('partnerModal')" class="mt-2 px-6 py-3 bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-slate-200 transition-colors shadow-md">
+                        Partner With LGTM →
+                    </button>
+                </div>
+
+                <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="p-6 bg-[#151122] rounded-2xl border border-white/5 hover:border-indigo-500/30 transition-all">
+                        <h4 class="font-bold text-white text-sm mb-1">Program Architecture</h4>
+                        <p class="text-xs text-slate-400">Challenge design, formats, timelines, tracks and participant journeys.</p>
+                    </div>
+                    <div class="p-6 bg-[#151122] rounded-2xl border border-white/5 hover:border-indigo-500/30 transition-all">
+                        <h4 class="font-bold text-white text-sm mb-1">Industry Partnerships</h4>
+                        <p class="text-xs text-slate-400">Technology companies, sponsors, technical partners and external experts.</p>
+                    </div>
+                    <div class="p-6 bg-[#151122] rounded-2xl border border-white/5 hover:border-indigo-500/30 transition-all">
+                        <h4 class="font-bold text-white text-sm mb-1">Program Operations</h4>
+                        <p class="text-xs text-slate-400">Mentors, judges, communications, schedules and participant support.</p>
+                    </div>
+                    <div class="p-6 bg-[#151122] rounded-2xl border border-white/5 hover:border-indigo-500/30 transition-all">
+                        <h4 class="font-bold text-white text-sm mb-1">Technical Coordination</h4>
+                        <p class="text-xs text-slate-400">Workshops, APIs, developer tools and competition infrastructure.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Technology Companies (Sticky Stacked Overlap) -->
+            <div class="sticky-stack-card bg-[#120e20] p-8 md:p-14 rounded-3xl border border-white/10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start shadow-2xl reveal-on-scroll" style="top: 140px;">
+                <div class="lg:col-span-4 space-y-4">
+                    <span class="px-3.5 py-1 rounded-full bg-indigo-500/15 text-indigo-300 font-mono text-xs uppercase tracking-widest">
+                        FOR TECHNOLOGY COMPANIES
+                    </span>
+                    <h3 class="cinzel-heading text-2xl md:text-4xl font-bold text-white">
+                        Get closer to the builders building what comes next.
+                    </h3>
+                    <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+                        Your product deserves more than a logo on a poster. LGTM creates structured opportunities for technology companies to engage directly with student developers.
+                    </p>
+                    <button onclick="openModal('partnerModal')" class="mt-2 px-6 py-3 bg-indigo-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-indigo-500 transition-colors shadow-lg shadow-indigo-600/20">
+                        Become a Tech Partner →
+                    </button>
+                </div>
+
+                <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="p-6 bg-[#171328] rounded-2xl border border-white/5 hover:border-indigo-500/30 transition-all">
+                        <h4 class="font-bold text-white text-sm mb-1">Developer Engagement</h4>
+                        <p class="text-xs text-slate-400">Put your technology directly in the hands of creators.</p>
+                    </div>
+                    <div class="p-6 bg-[#171328] rounded-2xl border border-white/5 hover:border-indigo-500/30 transition-all">
+                        <h4 class="font-bold text-white text-sm mb-1">Technical Challenges</h4>
+                        <p class="text-xs text-slate-400">Create challenges around your APIs, platforms & SDKs.</p>
+                    </div>
+                    <div class="p-6 bg-[#171328] rounded-2xl border border-white/5 hover:border-indigo-500/30 transition-all">
+                        <h4 class="font-bold text-white text-sm mb-1">Hiring Access</h4>
+                        <p class="text-xs text-slate-400">Evaluate top-tier emerging talent through real execution.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Past Events Section -->
+    <section id="past-events" class="py-28 md:py-36 px-6 md:px-16 border-b border-white/10 bg-[#08060d]">
+        <div class="max-w-7xl mx-auto w-full space-y-16 reveal-on-scroll">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <h2 class="cinzel-heading text-4xl md:text-6xl font-black text-white leading-tight subtle-purple-glow">
+                        PAST EVENTS 
+                    </h2>
+                    <p class="text-slate-400 mt-4 max-w-xl text-base md:text-lg">
+                        The event is temporary. The network isn't. Here is a glance at our executed programs and partner network.
+                    </p>
+                </div>
+                <!-- Interactive Filter Tabs -->
+                <div class="flex items-center gap-2 bg-[#120f1e] p-1.5 rounded-xl border border-white/10">
+                    <button onclick="filterEvents('all')" id="btn-all" class="px-4 py-2 rounded-lg text-xs font-mono uppercase bg-indigo-600 text-white transition-all font-bold">All</button>
+                    <button onclick="filterEvents('ai')" id="btn-ai" class="px-4 py-2 rounded-lg text-xs font-mono uppercase text-slate-400 hover:text-white transition-all font-bold">AI & Cloud</button>
+                    <button onclick="filterEvents('security')" id="btn-security" class="px-4 py-2 rounded-lg text-xs font-mono uppercase text-slate-400 hover:text-white transition-all font-bold">Security</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-y border-white/10">
+                <div>
+                    <p class="cinzel-heading text-3xl md:text-5xl font-black text-white">15+</p>
+                    <p class="text-xs text-slate-400 font-mono uppercase mt-1">Hackathons & Programs</p>
+                </div>
+                <div>
+                    <p class="cinzel-heading text-3xl md:text-5xl font-black text-white">10,000+</p>
+                    <p class="text-xs text-slate-400 font-mono uppercase mt-1">Student Builders</p>
+                </div>
+                <div>
+                    <p class="cinzel-heading text-3xl md:text-5xl font-black text-white">25+</p>
+                    <p class="text-xs text-slate-400 font-mono uppercase mt-1">Campus Partnerships</p>
+                </div>
+                <div>
+                    <p class="cinzel-heading text-3xl md:text-5xl font-black text-white">30+</p>
+                    <p class="text-xs text-slate-400 font-mono uppercase mt-1">Industry Sponsors</p>
+                </div>
+            </div>
+
+            <div id="events-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="event-card bg-[#100d1c] rounded-3xl overflow-hidden border border-white/10 card-hover" data-category="ai">
+                    <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=800&q=80" alt="GenAI Campus Sprint" class="w-full h-48 object-cover">
+                    <div class="p-6 space-y-3">
+                        <span class="text-xs font-mono px-3 py-1 bg-indigo-500/15 text-indigo-300 rounded-full">AI & Cloud</span>
+                        <h3 class="font-bold text-lg text-white">Delhi NCR AI Agent Sprint</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Structured 36-hour buildathon focusing on Autonomous Agents and LLM Workflows.</p>
+                    </div>
+                </div>
+
+                <div class="event-card bg-[#100d1c] rounded-3xl overflow-hidden border border-white/10 card-hover" data-category="security">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" alt="Cybersecurity CTF" class="w-full h-48 object-cover">
+                    <div class="p-6 space-y-3">
+                        <span class="text-xs font-mono px-3 py-1 bg-indigo-500/15 text-indigo-300 rounded-full">Cybersecurity</span>
+                        <h3 class="font-bold text-lg text-white">National Campus Security CTF</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Inter-college application security & defensive hacking championship.</p>
+                    </div>
+                </div>
+
+                <div class="event-card bg-[#100d1c] rounded-3xl overflow-hidden border border-white/10 card-hover" data-category="ai">
+                    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="DevTool Open Sprint" class="w-full h-48 object-cover">
+                    <div class="p-6 space-y-3">
+                        <span class="text-xs font-mono px-3 py-1 bg-indigo-500/15 text-indigo-300 rounded-full">Dev Tools</span>
+                        <h3 class="font-bold text-lg text-white">API & Infrastructure Hackathon</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Putting next-gen SDKs and developer tools into hands of student builders.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-28 md:py-36 px-6 md:px-16 border-b border-white/10 bg-[#090710]">
+        <div class="max-w-5xl mx-auto space-y-12 reveal-on-scroll">
+            <div class="text-center space-y-4">
+                <h2 class="cinzel-heading text-4xl md:text-5xl font-bold text-white">
+                    MEET THE TEAM
+                </h2>
+                <p class="text-slate-400 text-sm md:text-base max-w-xl mx-auto">
+                    Operating at the intersection of institutional partnerships, technology companies, and developer ecosystems.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-[#100d1c] p-8 md:p-10 rounded-3xl border border-white/10 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left card-hover">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Paridhi Sharma" class="w-28 h-28 rounded-full object-cover border-2 border-indigo-500/30 shadow-lg shrink-0">
+                    <div class="space-y-2">
+                        <h3 class="font-bold text-xl text-white">Paridhi Sharma</h3>
+                        <p class="text-xs font-mono text-indigo-300 uppercase tracking-widest">Co-Founder — Design & Outreach Meets Tech</p>
+                        <p class="text-xs text-slate-300 leading-relaxed">Leads design, community outreach, and technical collaboration initiatives.</p>
+                        <div class="pt-2">
+                            <a href="https://www.linkedin.com/in/theparidhisharma/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white text-xs inline-flex items-center gap-1.5"><i class="fa-brands fa-linkedin text-indigo-400"></i> LinkedIn Profile</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#100d1c] p-8 md:p-10 rounded-3xl border border-white/10 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left card-hover">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Nandinee" class="w-28 h-28 rounded-full object-cover border-2 border-indigo-500/30 shadow-lg shrink-0">
+                    <div class="space-y-2">
+                        <h3 class="font-bold text-xl text-white">Nandinee</h3>
+                        <p class="text-xs font-mono text-indigo-300 uppercase tracking-widest">Co-Founder — Strategy Meets Tech</p>
+                        <p class="text-xs text-slate-300 leading-relaxed">Drives strategic growth, institutional partnerships, and technical expansion.</p>
+                        <div class="pt-2">
+                            <a href="https://www.linkedin.com/in/thenandinee/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white text-xs inline-flex items-center gap-1.5"><i class="fa-brands fa-linkedin text-indigo-400"></i> LinkedIn Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-28 md:py-36 px-6 md:px-16 bg-[#0c0916] border-b border-white/10 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-indigo-950/20 via-transparent to-transparent pointer-events-none"></div>
+        
+        <div class="max-w-4xl mx-auto relative z-10 bg-[#100d1c] border border-white/15 rounded-3xl p-8 md:p-16 shadow-[0_0_80px_rgba(0,0,0,0.8)] text-center space-y-8 reveal-on-scroll">
+            <div class="space-y-3">
+                <h2 class="cinzel-heading text-4xl md:text-6xl font-black text-white tracking-wider subtle-purple-glow">
+                    CONTACT US
+                </h2>
+                <p class="text-slate-300 text-sm md:text-base max-w-xl mx-auto">
+                    Ready to collaborate, host a campus program, or discuss partnership opportunities? Reach out directly.
+                </p>
+            </div>
+
+            <div class="p-6 bg-[#151122] rounded-2xl border border-white/10 inline-flex flex-col sm:flex-row items-center justify-center gap-6 w-full max-w-2xl mx-auto">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/15 text-indigo-300 flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-regular fa-envelope"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-xs font-mono text-slate-400 uppercase tracking-widest">DIRECT INQUIRIES</p>
+                        <a href="mailto:hello@lgtmclub.in" class="cinzel-heading text-lg md:text-xl font-bold text-white hover:text-indigo-300 transition-colors">
+                            hello@lgtmclub.in
+                        </a>
+                    </div>
+                </div>
+
+                <button onclick="copyEmail()" class="px-5 py-3 bg-white hover:bg-slate-200 text-black font-bold uppercase tracking-wider text-xs rounded-xl transition-all shadow-lg flex items-center gap-2 whitespace-nowrap">
+                    <i class="fa-regular fa-copy"></i>
+                    <span id="copyBtnText">Copy Email</span>
+                </button>
+            </div>
+
+            <div class="flex flex-wrap justify-center items-center gap-4 pt-2">
+                <button onclick="openModal('partnerModal')" class="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-indigo-600/25">
+                    Start a Partnership Inquiry →
+                </button>
+            </div>
+
+            <div id="toast" class="hidden fixed bottom-10 right-10 bg-indigo-600 text-white px-6 py-3 rounded-xl font-bold text-xs uppercase shadow-2xl z-50 transition-all">
+                Email Address Copied to Clipboard!
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 px-6 md:px-16 bg-black text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 mb-10 pb-10 border-b border-white/10">
+            <div class="space-y-4">
+                <div class="cinzel-heading text-xl font-bold text-white tracking-widest flex items-center gap-2">
+                    <img src="https://i.ibb.co/Dfm8FWvv/logo.png" alt="LGTM Logo" class="w-6 h-6 rounded object-contain" onerror="this.src='https://placehold.co/30x30/151122/818cf8?text=LGTM'">
+                    LGTM CLUB
+                </div>
+                <p class="text-xs text-slate-500 leading-relaxed">
+                    Professional technology events & campus partnerships.
+                </p>
+                <p class="text-xs font-mono text-slate-600">Delhi NCR · India</p>
+            </div>
+
+            <div>
+                <h4 class="text-xs font-mono uppercase text-white tracking-wider mb-4">Programs</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#what-we-do" class="hover:text-white transition-colors">Hackathons</a></li>
+                    <li><a href="#what-we-do" class="hover:text-white transition-colors">Buildathons</a></li>
+                    <li><a href="#what-we-do" class="hover:text-white transition-colors">AI Challenges</a></li>
+                    <li><a href="#what-we-do" class="hover:text-white transition-colors">Cybersecurity CTFs</a></li>
+                    <li><a href="#what-we-do" class="hover:text-white transition-colors">Technical Workshops</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-xs font-mono uppercase text-white tracking-wider mb-4">Work With Us</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#for-ecosystem" class="hover:text-white transition-colors">Institutions</a></li>
+                    <li><a href="#for-ecosystem" class="hover:text-white transition-colors">Technology Companies</a></li>
+                    <li><a href="#for-ecosystem" class="hover:text-white transition-colors">Community Partners</a></li>
+                    <li><a href="#for-ecosystem" class="hover:text-white transition-colors">Student Builders</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-xs font-mono uppercase text-white tracking-wider mb-4">Company</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#hero-info" class="hover:text-white transition-colors">About LGTM</a></li>
+                    <li><a href="#team" class="hover:text-white transition-colors">Our Team</a></li>
+                    <li><a href="#past-events" class="hover:text-white transition-colors">Past Events</a></li>
+                    <li><a href="#contact" class="hover:text-white transition-colors">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-xs text-slate-600 gap-4">
+            <p>© 2026 LGTM Club. All rights reserved.</p>
+            <p class="cinzel-heading font-bold text-slate-500 tracking-wider">TECHNOLOGY. TALENT. CAMPUSES. CONNECTED.</p>
+        </div>
+    </footer>
+
+    <!-- Partner Inquiry Modal -->
+    <div id="partnerModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-[#100d1c] border border-white/20 rounded-3xl max-w-lg w-full p-8 relative space-y-6 text-slate-100 shadow-2xl">
+            <button onclick="closeModal('partnerModal')" class="absolute top-6 right-6 text-slate-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div>
+                <h3 class="cinzel-heading text-2xl font-bold text-white">PARTNER WITH LGTM</h3>
+                <p class="text-xs text-slate-400 mt-1">Let's design and commercialize your next campus technology program.</p>
+            </div>
+
+            <form onsubmit="handleFormSubmit(event)" class="space-y-4 text-xs">
+                <div>
+                    <label class="block text-slate-300 font-mono mb-1 uppercase tracking-wider">YOUR NAME</label>
+                    <input type="text" required placeholder="John Doe" class="w-full bg-[#151122] border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-400">
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-mono mb-1 uppercase tracking-wider">ORGANIZATION / INSTITUTION</label>
+                    <input type="text" required placeholder="University / Tech Company Name" class="w-full bg-[#151122] border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-400">
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-mono mb-1 uppercase tracking-wider">PARTNERSHIP TYPE</label>
+                    <select class="w-full bg-[#151122] border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-400">
+                        <option>Institution (University / Campus Partner)</option>
+                        <option>Technology Company (Sponsor / API Partner)</option>
+                        <option>Community Partner / Student Leader</option>
+                        <option>Other Collaboration</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-mono mb-1 uppercase tracking-wider">EMAIL ADDRESS</label>
+                    <input type="email" required placeholder="john@example.com" class="w-full bg-[#151122] border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-400">
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-mono mb-1 uppercase tracking-wider">MESSAGE / INQUIRY DETAILS</label>
+                    <textarea rows="3" placeholder="Tell us about your campus or program needs..." class="w-full bg-[#151122] border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-400"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-4 bg-white hover:bg-slate-200 text-black font-bold uppercase tracking-wider rounded-xl transition-all shadow-lg">
+                    Submit Partnership Inquiry
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Full-Page Program Detail View Spanning Entire Page -->
+    <div id="programDetailModal" class="fixed inset-0 w-full h-full bg-[#08060d] z-50 hidden overflow-y-auto flex flex-col p-6 md:p-16">
+        
+        <!-- Background Image with 50% Transparency & Theme Consistency spanning entire page -->
+        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <img id="modal-bg-img" src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1920&q=80" 
+                 alt="Background Texture" 
+                 class="w-full h-full object-cover opacity-50 mix-blend-luminosity">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#08060d]/90 via-[#08060d]/80 to-[#08060d]/95"></div>
+        </div>
+
+        <div class="relative z-10 w-full max-w-7xl mx-auto flex-1 flex flex-col justify-between py-6 space-y-12">
+            
+            <!-- Top Menu Pill & Close Button -->
+            <div class="flex justify-between items-center w-full">
+                <div class="glass-pill px-6 py-2.5 rounded-full text-xs font-mono uppercase tracking-widest text-slate-200 shadow-lg border border-white/10 flex items-center gap-2">
+                    <img src="https://i.ibb.co/Dfm8FWvv/logo.png" alt="LGTM Logo" class="w-4 h-4 rounded object-contain" onerror="this.style.display='none'">
+                    <span id="modal-menu-label">LGTM Program</span>
+                </div>
+                <button onclick="closeModal('programDetailModal')" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Main Title & Description Section -->
+            <div class="space-y-6 max-w-5xl">
+                <h3 id="modal-title" class="cinzel-heading text-5xl md:text-8xl font-black text-white tracking-wide subtle-purple-glow">
+                    HACKATHONS
+                </h3>
+                <p id="modal-desc" class="serif-heading text-xl md:text-3xl text-slate-200 font-medium leading-relaxed">
+                    Structured build experiences designed around real technologies, real challenges, and real outcomes.
+                </p>
+            </div>
+
+            <!-- + MORE DETAILED VIEW OF WHAT WE DO Section -->
+            <div class="space-y-6 pt-4">
+                <div class="inline-block">
+                    <span class="cinzel-heading font-extrabold text-sm md:text-base text-white uppercase tracking-widest border-b-2 border-indigo-400 pb-1">
+                        +MORE DETAILED VIEW OF WHAT WE DO
+                    </span>
+                </div>
+
+                <div id="modal-features-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                    <div class="p-8 bg-[#151122]/90 backdrop-blur-md rounded-2xl border border-white/10 shadow-2xl">
+                        <h4 class="cinzel-heading font-bold text-white text-lg mb-2">Targeted Adoption</h4>
+                        <p class="text-sm md:text-base text-slate-300 leading-relaxed">Put your APIs & tools directly into developers' hands during high-intensity sprint milestones.</p>
+                    </div>
+                    <div class="p-8 bg-[#151122]/90 backdrop-blur-md rounded-2xl border border-white/10 shadow-2xl">
+                        <h4 class="cinzel-heading font-bold text-white text-lg mb-2">Full-Cycle Execution</h4>
+                        <p class="text-sm md:text-base text-slate-300 leading-relaxed">End-to-end management from ideation kickoff to demo day, mentor queuing, and judging infrastructure.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Footer -->
+            <div class="pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-xs md:text-sm font-mono text-slate-300 uppercase tracking-wider">Ready to host or sponsor this program?</p>
+                <button onclick="closeModal('programDetailModal'); openModal('partnerModal');" class="w-full sm:w-auto px-8 py-4 bg-white text-black hover:bg-slate-200 font-bold uppercase tracking-wider text-xs rounded-xl transition-all shadow-xl">
+                    Partner With Us →
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        const programModules = [
+            {
+                title: "HACKATHONS",
+                menuLabel: "LGTM Program",
+                desc: "Structured build experiences designed around real technologies, real challenges, and real outcomes.",
+                features: [
+                    { title: "Targeted API Adoption", desc: "Put your APIs & tools directly into developers' hands during high-intensity sprint milestones." },
+                    { title: "Full-Cycle Execution", desc: "End-to-end management from ideation kickoff to demo day, mentor queuing, and judging infrastructure." }
+                ],
+                img: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1920&q=80"
+            },
+            {
+                title: "AI PROGRAMS",
+                menuLabel: "LGTM Program",
+                desc: "GenAI, AI-agent, ML, and emerging-technology challenges designed for the next generation of builders working with LLMs, RAG pipelines, and autonomous agent workflows.",
+                features: [
+                    { title: "Cloud Compute Credits", desc: "Equip builders with top-tier cloud credits and LLM access for deep prototyping." },
+                    { title: "Autonomous Agent Sprints", desc: "Build real AI solutions over intense sprint milestones with expert mentorship." }
+                ],
+                img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1920&q=80"
+            },
+            {
+                title: "BUILDATHONS",
+                menuLabel: "LGTM Program",
+                desc: "Focused, execution-first building experiences centered around shipping MVP software, developer tooling, and rapid product prototypes over sustained sprints.",
+                features: [
+                    { title: "Rapid Feedback Loops", desc: "Iterate quickly with expert mentor guidance and real-time technical support on standby." },
+                    { title: "Startup Incubator Pipelines", desc: "Connect winning prototypes directly to venture pipelines and investor networks." }
+                ],
+                img: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1920&q=80"
+            },
+            {
+                title: "CYBERSECURITY",
+                menuLabel: "LGTM Program",
+                desc: "Capture-The-Flag competitions, secure-coding challenges, application security programs, and defensive hacking tournaments tailored for campus security talent.",
+                features: [
+                    { title: "Real-World Vulnerabilities", desc: "Test defensive skills against simulated enterprise threats and complex codebases." },
+                    { title: "Penetration Testing Labs", desc: "Hands-on environments designed for ethical hackers and security enthusiasts." }
+                ],
+                img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=80"
+            },
+            {
+                title: "WORKSHOPS",
+                menuLabel: "LGTM Program",
+                desc: "Practical technical learning sessions connecting students directly with cutting-edge technology, developer tools, products, and industry engineers.",
+                features: [
+                    { title: "Interactive Coding Labs", desc: "Step-by-step guidance through advanced technical concepts and live implementations." },
+                    { title: "SDK & API Walkthroughs", desc: "Direct onboarding with platform engineering teams and ecosystem architects." }
+                ],
+                img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1920&q=80"
+            },
+            {
+                title: "DEV PROGRAMS",
+                menuLabel: "LGTM Program",
+                desc: "API challenges, SDK competitions, open-source documentation sprints, and sustained campus technology initiatives connecting institutions with tech ecosystems.",
+                features: [
+                    { title: "Open-Source Sprints", desc: "Contribute meaningfully to developer tool ecosystems and core infrastructure libraries." },
+                    { title: "Product Discovery", desc: "Expose your developer tools to highly engaged campus developer communities." }
+                ],
+                img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80"
+            },
+            {
+                title: "INNOVATION",
+                menuLabel: "LGTM Program",
+                desc: "Incubation pipelines, entrepreneurial challenges, and proof-of-concept showcases bridging academic research with commercial market viability.",
+                features: [
+                    { title: "Mentorship Networks", desc: "Access industry veterans, angel investors, and serial founders for strategic guidance." },
+                    { title: "Demo Day Showcases", desc: "Pitch refined technical solutions to leading venture capitalists and tech executives." }
+                ],
+                img: "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1920&q=80"
+            },
+            {
+                title: "IDEATHONS",
+                menuLabel: "LGTM Program",
+                desc: "Early-stage brainstorming challenges, problem-statement hackathons, and design-thinking sprints for formulating high-impact technical solutions.",
+                features: [
+                    { title: "Problem Framing", desc: "Tackle complex enterprise and social impact challenges with structured frameworks." },
+                    { title: "Rapid Validation", desc: "Test conceptual viability with expert judging panels and industry stakeholders." }
+                ],
+                img: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1920&q=80"
+            }
+        ];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const navbar = document.getElementById('sticky-navbar');
+            const splitTop = document.getElementById('splitTopPanel');
+            const splitBottom = document.getElementById('splitBottomPanel');
+            
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const heroHeight = window.innerHeight;
+
+                if (scrollY > 300) {
+                    navbar.classList.remove('opacity-0', '-translate-y-10');
+                    navbar.classList.add('opacity-100', 'translate-y-0');
+                } else {
+                    navbar.classList.add('opacity-0', '-translate-y-10');
+                    navbar.classList.remove('opacity-100', 'translate-y-0');
+                }
+
+                const progress = Math.min(1, Math.max(0, scrollY / heroHeight));
+                const moveAmount = progress * 100;
+                
+                splitTop.style.transform = `translateY(-${moveAmount}%)`;
+                splitBottom.style.transform = `translateY(${moveAmount}%)`;
+            });
+
+            // Intersection Observer for scroll entrance animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        function filterEvents(category) {
+            const cards = document.querySelectorAll('.event-card');
+            const btnAll = document.getElementById('btn-all');
+            const btnAi = document.getElementById('btn-ai');
+            const btnSecurity = document.getElementById('btn-security');
+
+            // Reset buttons
+            [btnAll, btnAi, btnSecurity].forEach(b => {
+                b.className = "px-4 py-2 rounded-lg text-xs font-mono uppercase text-slate-400 hover:text-white transition-all font-bold";
+            });
+
+            if (category === 'all') {
+                btnAll.className = "px-4 py-2 rounded-lg text-xs font-mono uppercase bg-indigo-600 text-white transition-all font-bold";
+            } else if (category === 'ai') {
+                btnAi.className = "px-4 py-2 rounded-lg text-xs font-mono uppercase bg-indigo-600 text-white transition-all font-bold";
+            } else if (category === 'security') {
+                btnSecurity.className = "px-4 py-2 rounded-lg text-xs font-mono uppercase bg-indigo-600 text-white transition-all font-bold";
+            }
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                    setTimeout(() => card.style.opacity = '1', 50);
+                } else {
+                    card.style.opacity = '0';
+                    setTimeout(() => card.style.display = 'none', 300);
+                }
+            });
+        }
+
+        function openProgramDetail(index) {
+            const mod = programModules[index];
+            if (!mod) return;
+
+            document.getElementById('modal-menu-label').innerText = mod.menuLabel;
+            document.getElementById('modal-title').innerText = mod.title;
+            document.getElementById('modal-desc').innerText = mod.desc;
+            document.getElementById('modal-bg-img').src = mod.img;
+
+            const grid = document.getElementById('modal-features-grid');
+            grid.innerHTML = '';
+            mod.features.forEach(feat => {
+                const div = document.createElement('div');
+                div.className = 'p-8 bg-[#151122]/90 backdrop-blur-md rounded-2xl border border-white/10 shadow-2xl';
+                div.innerHTML = `<h4 class="cinzel-heading font-bold text-white text-lg mb-2">${feat.title}</h4><p class="text-sm md:text-base text-slate-300 leading-relaxed">${feat.desc}</p>`;
+                grid.appendChild(div);
+            });
+
+            openModal('programDetailModal');
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        function copyEmail() {
+            const email = "hello@lgtmclub.in";
+            const btnText = document.getElementById('copyBtnText');
+            const toast = document.getElementById('toast');
+
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(email);
+            } else {
+                const input = document.createElement('input');
+                input.value = email;
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input);
+            }
+
+            btnText.innerText = "Copied!";
+            toast.classList.remove('hidden');
+
+            setTimeout(() => {
+                btnText.innerText = "Copy Email";
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            closeModal('partnerModal');
+            
+            const toast = document.getElementById('toast');
+            toast.innerText = "Thank you! Partnership inquiry received.";
+            toast.classList.remove('hidden');
+
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.innerText = "Email Address Copied to Clipboard!";
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
